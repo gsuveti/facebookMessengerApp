@@ -3,6 +3,10 @@
 <body>
 <script>
 
+  //maybe the user_ref should also be unique
+
+
+
   window.fbAsyncInit = function () {
     FB.init({
       appId: "1545239305692664",
@@ -19,6 +23,9 @@
         console.log("Plugin was rendered");
       } else if (e.event == 'checkbox') {
         var checkboxState = e.state;
+        if (e.state == 'checked') {
+          confirmOptIn();
+        }
         console.log("Checkbox state: " + checkboxState);
       } else if (e.event == 'not_you') {
         console.log("User clicked 'not you'");
@@ -28,6 +35,18 @@
 
     });
 
+
+    function confirmOptIn() {
+      console.log('confirmOptIn');
+
+
+      FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+        'app_id': '1545239305692664',
+        'page_id': '907465632667658',
+        'ref': 'faacbf6fde46f5c1986089ffd4b62a0c',
+        'user_ref': 'faacbf6fde46f5c1986089ffd4b62a0c'
+      });
+    }
   };
 
   (function (d, s, id) {
