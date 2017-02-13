@@ -1,0 +1,86 @@
+<html>
+
+<body>
+<script>
+
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: "1545239305692664",
+      xfbml: true,
+      version: "v2.6"
+    });
+
+
+    FB.Event.subscribe('messenger_checkbox', function (e) {
+      console.log("messenger_checkbox event");
+      console.log(e);
+
+      if (e.event == 'rendered') {
+        console.log("Plugin was rendered");
+      } else if (e.event == 'checkbox') {
+        var checkboxState = e.state;
+        console.log("Checkbox state: " + checkboxState);
+      } else if (e.event == 'not_you') {
+        console.log("User clicked 'not you'");
+      } else if (e.event == 'hidden') {
+        console.log("Plugin was hidden");
+      }
+
+    });
+
+  };
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+      return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+  function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+
+  random = guid();
+
+</script>
+<style type="text/css">
+    .fb-send-to-messenger span {
+        overflow: visible !important;
+    }
+
+    .fb-send-to-messenger span iframe {
+        width: 200px !important;
+        height: 100px !important;
+    }
+</style>
+
+
+<div class="fb-send-to-messenger fb_iframe_widget" enforce_login="false" messenger_app_id="1545239305692664"
+     page_id="907465632667658" data-ref="faacbf6fde46f5c1986089ffd4b62a0c" color="blue" size="large"></div>
+
+
+<div class="fb-messenger-checkbox fb_iframe_widget"
+     origin="http://localhost:3000" enforce_login="false"
+     messenger_app_id="1545239305692664"
+     page_id="907465632667658"
+     user_ref="<%= randomUserRefPrefix %>faacbf6fde46f5c1986089ffd4b62a0c"
+     allow_login="true"
+     prechecked="false"
+     size="large"></div>
+
+
+</body>
+</html>
